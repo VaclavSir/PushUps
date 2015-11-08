@@ -287,12 +287,7 @@ void loopMain()
 	}
 
 	if (buttonsPressedNow[1]) { // pause / resume
-		if (isPaused) {
-			endPause();
-		}
-		else {
-			startPause();
-		}
+		isPaused ? endPause() : startPause();
 	}
 
 	if (buttonsPressedNow[3]) { // config
@@ -325,6 +320,7 @@ String getFormattedTime() {
 		+ ':' + formatDigits(second());
 
 	DEBUG && Serial.println(clock);
+
 	return clock;
 } 
 String formatDigits(int digits) {
@@ -405,13 +401,6 @@ void loop() {
 		buttonsPressedNow[i] = buttonState == 0 && globalButtonsStates[i] == 1;
 		globalButtonsStates[i] = buttonState;
 	}
-
-	switch (currentScreen) {
-	case mainScreen:
-		loopMain();
-		break;
-	case configScreen:
-		loopConfig();
-		break;
-	}
+	
+	currentScreen == mainScreen ? loopMain() : loopConfig();
 }
