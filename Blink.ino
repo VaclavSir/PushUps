@@ -148,6 +148,9 @@ void setup()
 		thresholdUp = THRESHOLD_DEFAULT_UP;
 		thresholdDown = THRESHOLD_DEFAULT_DOWN;
 	}
+
+	renderSplashScreen();
+
 	setTime(0);
 }
 
@@ -170,6 +173,21 @@ void drawTextAlignedToRight(String text, int y = 0)
 		display.write(text.charAt(i));
 	}
 
+}
+
+void renderSplashScreen()
+{
+	display.clearDisplay();
+	String text = "PushUps\n#czhackathon\n2015\nVaclav Sir\nTomas Michna";
+	int textLength = text.length();
+	display.setTextSize(1);
+	display.setTextColor(BLACK);
+	display.setCursor(0, 0);
+	for (int i = 0; i < textLength; i++) {
+		display.write(text.charAt(i));
+	}
+	display.display();
+	delay(1000);
 }
 
 void drawTime()
